@@ -3,34 +3,34 @@ import MetricItem from "./other-metrics/MetricItem";
 
 const OtherMetrics: FC = () => {
   return (
-    <div className="flex">
+    <div className="flex justify-between bg-slate-50 rounded-2xl w-5/6 p-4">
       <MetricItem
         src="/weather-icons/humidity.svg"
         alt="cloudy icon"
         width={30}
         height={30}
-        value="humidity value"
+        value="85%"
       />
       <MetricItem
-        src="/weather-icons/humidity.svg"
-        alt="cloudy icon"
+        src="/weather-icons/wind.svg"
+        alt="wind icon"
         width={30}
         height={30}
-        value="humidity value"
+        value="9km/h"
       />
       <MetricItem
-        src="/weather-icons/humidity.svg"
-        alt="cloudy icon"
+        src="/weather-icons/air_quality.svg"
+        alt="air quality icon"
         width={30}
         height={30}
-        value="humidity value"
+        value="75μg"
       />
       <MetricItem
-        src="/weather-icons/humidity.svg"
-        alt="cloudy icon"
+        src="weather-icons/feel_like.svg"
+        alt="feel like icon"
         width={30}
         height={30}
-        value="humidity value"
+        value="26°"
       />
     </div>
   );

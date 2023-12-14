@@ -4,11 +4,17 @@ interface DateFormatProps {
   dayAndMonth: string;
   weekDay: string;
   time?: string;
+  className?: string;
 }
 
-const DateFormat: FC<DateFormatProps> = ({ dayAndMonth, weekDay, time }) => {
+const DateFormat: FC<DateFormatProps> = ({
+  dayAndMonth,
+  weekDay,
+  time,
+  className,
+}) => {
   return (
-    <>
+    <div className={className}>
       {time ? (
         <div>{`${dayAndMonth}, ${weekDay} ${time}`}</div>
       ) : (
@@ -17,7 +23,7 @@ const DateFormat: FC<DateFormatProps> = ({ dayAndMonth, weekDay, time }) => {
           <p>{dayAndMonth}</p>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

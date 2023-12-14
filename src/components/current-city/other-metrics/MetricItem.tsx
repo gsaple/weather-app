@@ -17,7 +17,7 @@ const MetricItem: FC<MetricItemProps> = ({
   value,
 }) => {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <WeatherIcon src={src} alt={alt} width={width} height={height} />
       {value}
     </div>

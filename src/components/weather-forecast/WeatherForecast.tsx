@@ -3,7 +3,7 @@ import OneDayForecast from "./one-day-forecast/OneDayForecast";
 
 const WeatherForecast: FC = () => {
   return (
-    <div className="flex">
+    <>
       <OneDayForecast
         dayAndMonth="10 December"
         weekDay="Sunday"
@@ -36,7 +36,7 @@ const WeatherForecast: FC = () => {
         low={30}
         high={32}
       />
-    </div>
+    </>
   );
 };
 
