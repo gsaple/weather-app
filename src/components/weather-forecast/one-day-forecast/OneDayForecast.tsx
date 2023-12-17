@@ -24,7 +24,7 @@ const OneDayForecast: FC<OneDayForecastProps> = ({
     <div className="flex flex-col items-center">
       <DateFormat dayAndMonth={dayAndMonth} weekDay={weekDay} />
       <WeatherIcon src={iconSrc} alt={alt} width={196} height={196} />
-      <TemperatureRange low={low} high={high} />
+      <TemperatureRange low={low} high={high} className="font-medium"/>
     </div>
   );
 };

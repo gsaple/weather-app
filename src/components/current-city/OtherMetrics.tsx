@@ -3,7 +3,7 @@ import MetricItem from "./other-metrics/MetricItem";
 
 const OtherMetrics: FC = () => {
   return (
-    <div className="flex justify-between bg-slate-50 rounded-2xl w-5/6 p-4">
+    <div className="flex justify-between bg-slate-50/90 rounded-2xl w-5/6 p-4">
       <MetricItem
         src="/weather-icons/humidity.svg"
         alt="cloudy icon"

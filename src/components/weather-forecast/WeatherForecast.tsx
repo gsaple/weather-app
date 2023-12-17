@@ -7,24 +7,24 @@ const WeatherForecast: FC = () => {
       <OneDayForecast
         dayAndMonth="24 July"
         weekDay="Monday"
-        iconSrc="/weather-icons/sunny.png"
-        alt="sunny icon"
+        iconSrc="/weather-icons/rainy.png"
+        alt="rainy icon"
         low={30}
         high={32}
       />
       <OneDayForecast
         dayAndMonth="25 July"
         weekDay="Tuesday"
-        iconSrc="/weather-icons/sunny.png"
-        alt="sunny icon"
+        iconSrc="/weather-icons/partly_cloudy.png"
+        alt="partly_cloudy icon"
         low={30}
         high={32}
       />
       <OneDayForecast
         dayAndMonth="10 November"
         weekDay="Wednesday"
-        iconSrc="/weather-icons/sunny.png"
-        alt="sunny icon"
+        iconSrc="/weather-icons/cloudy.png"
+        alt="cloudy icon"
         low={30}
         high={32}
       />
