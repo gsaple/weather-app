@@ -16,14 +16,14 @@ const OtherMetrics: FC = () => {
         alt="wind icon"
         width={30}
         height={30}
-        value="9km/h"
+        value="9 km/h"
       />
       <MetricItem
         src="/weather-icons/air_quality.svg"
         alt="air quality icon"
         width={30}
         height={30}
-        value="75μg"
+        value="75 μg"
       />
       <MetricItem
         src="weather-icons/feel_like.svg"
