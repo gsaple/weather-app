@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import DateFormat from "../../shared-ui/DateFormat";
-import WeatherIcon from "../../shared-ui/WeatherIcon";
+import BackgroundImage from "@/components/shared-ui/BackgroundImage";
 import TemperatureRange from "../../shared-ui/TemperatureRange";
 
 interface OneDayForecastProps {
@@ -23,7 +23,7 @@ const OneDayForecast: FC<OneDayForecastProps> = ({
   return (
     <div className="flex flex-col items-center">
       <DateFormat dayAndMonth={dayAndMonth} weekDay={weekDay} />
-      <WeatherIcon src={iconSrc} alt={alt} width={196} height={196} />
+      <BackgroundImage src={iconSrc} alt={alt} originalWidth={196} originalHeight={196} className="w-40"/>
       <TemperatureRange low={low} high={high} className="font-medium"/>
     </div>
   );

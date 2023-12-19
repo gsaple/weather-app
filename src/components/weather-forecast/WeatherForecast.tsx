@@ -3,7 +3,7 @@ import OneDayForecast from "./one-day-forecast/OneDayForecast";
 
 const WeatherForecast: FC = () => {
   return (
-    <div className="flex px-4 py-8 justify-between absolute -left-5">
+    <div className="flex px-4 py-8 justify-between w-full absolute -left-4">
       <OneDayForecast
         dayAndMonth="24 July"
         weekDay="Monday"
