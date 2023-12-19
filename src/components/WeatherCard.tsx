@@ -13,10 +13,10 @@ const WeatherCard: FC = () => {
       <div className="row-span-3 col-span-11 my-7 mx-9 relative">
         <WeatherForecast />
       </div>
-      <div className="row-span-1 col-span-11 my-7 mx-9">
+      <div className="row-span-1 col-span-11 self-end mx-9">
         <SearchBar />
       </div>
-      <div className="flex row-span-2 col-span-11 m-6 border-8">
+      <div className="row-span-2 col-span-11 mb-7 mx-9">
         <OtherCities />
       </div>
     </div>
