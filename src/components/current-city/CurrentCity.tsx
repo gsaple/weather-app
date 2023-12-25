@@ -11,7 +11,7 @@ const CurrentCity: FC = () => {
   const dateString: string[] = dateFormat(new Date());
 
   return (
-    <div className="flex flex-col items-center justify-around bg-blue-500 rounded-[1.75rem] h-full relative">
+    <div className="flex flex-col items-center justify-around bg-blue-500 rounded-[1.75rem] sM:h-[37.5rem] sm:h-full relative sM:w-[22.25rem] sm:w-[20.625rem]">
       <BackgroundImage
         className="absolute top-0 right-0"
         src="/backgrounds/sunny.png"

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
   content: [
@@ -15,6 +16,16 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "16": "repeat(16, minmax(0, 1fr))",
+      },
+      gridTemplateRows: {
+        "9": "repeat(9, minmax(0, 1fr))",
+      },
+      gridRow: {
+        "span-7": "span 7 / span 7",
+      },
+      screens: {
+        sM: { max: "639px" },
+        ...defaultTheme.screens,
       },
     },
   },

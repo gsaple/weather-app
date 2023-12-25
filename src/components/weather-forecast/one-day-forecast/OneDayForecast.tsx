@@ -21,10 +21,16 @@ const OneDayForecast: FC<OneDayForecastProps> = ({
   high,
 }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center sM:first:pb-5 sM:[&:nth-child(2)]:pb-5 sm:first:pb-10 sm:[&:nth-child(2)]:pb-10 lg:pb-0">
       <DateFormat dayAndMonth={dayAndMonth} weekDay={weekDay} />
-      <BackgroundImage src={iconSrc} alt={alt} originalWidth={196} originalHeight={196} className="w-40"/>
-      <TemperatureRange low={low} high={high} className="font-medium"/>
+      <BackgroundImage
+        src={iconSrc}
+        alt={alt}
+        originalWidth={196}
+        originalHeight={196}
+        className="sM:w-[10.5rem] sm:w-36 lg:w-[10.5rem]"
+      />
+      <TemperatureRange low={low} high={high} className="font-medium" />
     </div>
   );
 };

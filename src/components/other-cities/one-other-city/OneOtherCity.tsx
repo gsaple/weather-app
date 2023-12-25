@@ -29,7 +29,7 @@ const OneOtherCity: FC<OneOtherCityProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center justify-center relative w-[10.5rem] h-[8.125rem] rounded-[1.25rem] ${bgColor} hover:shadow-xl ${hoverShadowColor}`}
+      className={`flex flex-col items-center justify-center relative sM:first:mb-4 sM:[&:nth-child(2)]:mb-4 w-[10.5rem] h-[8.125rem] rounded-[1.25rem] ${bgColor} hover:shadow-xl ${hoverShadowColor}`}
     >
       <BackgroundImage
         className="absolute top-0 left-0 -z-50"

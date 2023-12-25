@@ -3,7 +3,7 @@ import OneOtherCity from "./one-other-city/OneOtherCity";
 
 const OtherCities: FC = () => {
   return (
-    <div className="flex justify-between items-end h-full">
+    <div className="flex flex-wrap justify-between items-end h-full">
       <OneOtherCity
         iconSrc="/weather-icons/sunny.png"
         iconAlt="sunny icon"
