@@ -3,7 +3,7 @@ import OneDayForecast from "./one-day-forecast/OneDayForecast";
 
 const WeatherForecast: FC = () => {
   return (
-    <div className="flex flex-wrap lg:pt-8 justify-between">
+    <div className="flex flex-wrap justify-between lg:pt-8">
       <OneDayForecast
         dayAndMonth="24 July"
         weekDay="Monday"

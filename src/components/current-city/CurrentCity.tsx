@@ -11,9 +11,9 @@ const CurrentCity: FC = () => {
   const dateString: string[] = dateFormat(new Date());
 
   return (
-    <div className="flex flex-col items-center justify-around bg-blue-500 rounded-[1.75rem] sM:h-[37.5rem] sm:h-full relative sM:w-[22.25rem] sm:w-[20.625rem]">
+    <div className="relative flex flex-col items-center justify-around rounded-[1.75rem] bg-blue-500 sm:h-full sm:w-[20.625rem] sM:h-[37.5rem] sM:w-[22.25rem]">
       <BackgroundImage
-        className="absolute top-0 right-0"
+        className="absolute right-0 top-0"
         src="/backgrounds/sunny.png"
         alt="sunny background pic"
         originalWidth={330}
@@ -23,11 +23,11 @@ const CurrentCity: FC = () => {
         dayAndMonth={dateString[1]}
         weekDay={dateString[0]}
         time={dateString[2]}
-        className="text-white self-start ml-6"
+        className="ml-6 self-start text-white"
       />
       <CityName
         cityName="Sydney"
-        className="text-white text-2xl font-semibold"
+        className="text-2xl font-semibold text-white"
       />
       <Temperature value={32} low={28} high={32} />
       <WeatherIcon

@@ -29,10 +29,10 @@ const OneOtherCity: FC<OneOtherCityProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center justify-center relative sM:first:mb-4 sM:[&:nth-child(2)]:mb-4 w-[10.5rem] h-[8.125rem] rounded-[1.25rem] ${bgColor} hover:shadow-xl ${hoverShadowColor}`}
+      className={`relative flex h-[8.125rem] w-[10.5rem] flex-col items-center justify-center rounded-[1.25rem] sM:first:mb-4 sM:[&:nth-child(2)]:mb-4 ${bgColor} hover:shadow-xl ${hoverShadowColor}`}
     >
       <BackgroundImage
-        className="absolute top-0 left-0 -z-50"
+        className="absolute left-0 top-0 -z-50"
         src={cityBgSrc}
         alt={cityBgAlt}
         originalWidth={168}
@@ -42,12 +42,12 @@ const OneOtherCity: FC<OneOtherCityProps> = ({
       <div>
         <CityName
           cityName={cityName}
-          className="text-white text-xl font-semibold"
+          className="text-xl font-semibold text-white"
         />
         <TemperatureRange
           low={low}
           high={high}
-          className="text-white text-center text-sm"
+          className="text-center text-sm text-white"
         />
       </div>
     </div>

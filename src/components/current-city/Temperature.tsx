@@ -10,14 +10,14 @@ interface TemperatureProps {
 const Temperature: FC<TemperatureProps> = ({ value, low, high }) => {
   return (
     <div>
-      <div className="text-slate-200 text-[5.25rem] leading-none font-semibold relative">
+      <div className="relative text-[5.25rem] font-semibold leading-none text-slate-200">
         {value}
-        <span className="absolute top-0 left-[100%]">°</span>
+        <span className="absolute left-[100%] top-0">°</span>
       </div>
       <TemperatureRange
         low={low}
         high={high}
-        className="text-white text-center"
+        className="text-center text-white"
       />
     </div>
   );

@@ -20,7 +20,9 @@ const DateFormat: FC<DateFormatProps> = ({
       ) : (
         <div>
           <div className="text-2xl font-semibold">{weekDay}</div>
-          <p className="text-center text-sm text-zinc-800 font-medium">{dayAndMonth}</p>
+          <p className="text-center text-sm font-medium text-zinc-800">
+            {dayAndMonth}
+          </p>
         </div>
       )}
     </div>
