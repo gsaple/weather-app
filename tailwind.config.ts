@@ -27,6 +27,9 @@ const config: Config = {
         sM: { max: "639px" },
         ...defaultTheme.screens,
       },
+      colors: {
+        "cadet-grey": "#94a3b8",
+      },
     },
   },
   plugins: [],
