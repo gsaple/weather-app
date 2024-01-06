@@ -26,6 +26,18 @@
   content: "\f002";
 }
 
-.nf-cod-chrome_close:before {
-  content: "\eab8";
+.nf-md-close_outline:before {
+  content: "\f06c9";
+}
+
+.nf-md-map_marker_radius:before {
+  content: "\f0352";
+}
+
+.nf-md-close_network:before {
+  content: "\f015b";
+}
+
+.nf-fa-warning:before {
+  content: "\f071";
 }
