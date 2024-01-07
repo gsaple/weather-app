@@ -40,6 +40,7 @@ const config: Config = {
         "spring-green": "#15803d",
         "spruce-green": "#166534",
         "silver-sand": "#c1c1c1",
+        "crystal-blue": "#60a5fA",
       },
     },
   },

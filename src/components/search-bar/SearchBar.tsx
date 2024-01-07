@@ -1,14 +1,18 @@
 "use client";
 import { type FC } from "react";
 import { useState } from "react";
+import Suggestions from "./Suggestions";
+import Spinner from "../shared-ui/Spinner";
 
 const SearchBar: FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [showCancel, setShowCancel] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.currentTarget.value);
   };
+
   const onCloseClicked = () => {
     setInputValue("");
     document.getElementById("cityField")?.focus();
@@ -21,7 +25,11 @@ const SearchBar: FC = () => {
   return (
     <div className="flex lg:w-2/4">
       <div className="relative grow">
-        <i className="nf nf-fa-search text-cadet-grey absolute left-1 top-2.5"></i>
+        {isLoading ? (
+          <Spinner className="absolute left-1 top-2.5 h-4 w-4 text-crystal-blue" />
+        ) : (
+          <i className="nf nf-fa-search absolute left-1 top-2.5 text-cadet-grey"></i>
+        )}
         <input
           type="text"
           id="cityField"
@@ -37,14 +45,15 @@ const SearchBar: FC = () => {
         />
         {inputValue && (
           <i
-            className="nf nf-cod-chrome_close text-cadet-grey absolute right-1 top-2.5"
+            className="nf nf-md-close_outline absolute right-1 top-2.5 text-cadet-grey"
             onClick={onCloseClicked}
           ></i>
         )}
+        <Suggestions typedInput={inputValue} setLoading={setIsLoading} />
       </div>
       {showCancel && (
         <button
-          className="text-cadet-grey ml-2 font-medium"
+          className="ml-2 font-medium text-cadet-grey"
           onClick={onCancelClicked}
         >
           Cancel
