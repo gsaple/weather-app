@@ -1,6 +1,6 @@
 "use client";
 import { type FC } from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Suggestions from "./Suggestions";
 import Spinner from "../shared-ui/Spinner";
 
@@ -8,6 +8,10 @@ const SearchBar: FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [showCancel, setShowCancel] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const cachedSetIsLoading = useCallback((loadingStatus: boolean) => {
+    setIsLoading(loadingStatus);
+  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.currentTarget.value);
@@ -49,7 +53,12 @@ const SearchBar: FC = () => {
             onClick={onCloseClicked}
           ></i>
         )}
-        <Suggestions typedInput={inputValue} setLoading={setIsLoading} />
+        {inputValue && (
+          <Suggestions
+            typedInput={inputValue}
+            setLoading={cachedSetIsLoading}
+          />
+        )}
       </div>
       {showCancel && (
         <button

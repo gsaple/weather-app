@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, memo } from "react";
 import SuggestionItem from "./suggestion/SuggestionItem";
 import NonSuggestions from "./NonSuggestions";
 import {
@@ -9,8 +9,10 @@ import {
 
 interface SuggestionProps {
   typedInput: string;
-  setLoading: Dispatch<SetStateAction<boolean>>;
+  setLoading: (loadingStatus: boolean) => void;
 }
+
+type StatusType = "" | "error" | "empty" | "success";
 
 export const containerClass: string =
   "absolute top-[100%] z-10 mt-2 w-full rounded-lg py-1 font-medium";
@@ -19,14 +21,12 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
   const [placeSuggestions, setPlaceSuggestions] = useState<
     SuggestedPlaceInfo[]
   >([]);
-  const [networkError, setNetworkError] = useState<boolean>(false);
+  const [responseStatus, setResponseStatus] = useState<StatusType>("");
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
     null,
   );
 
   const abortController = new AbortController();
-  const abortSignal = abortController.signal;
-
   const typingPause = 500; // test if user 'done' typing (i.e. pause for 500ms)
 
   useEffect(() => {
@@ -35,12 +35,20 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
       const newTypingTimeout = setTimeout(async () => {
         try {
           setLoading(true);
-          setPlaceSuggestions(
-            await getPlaceSuggestions(typedInput, abortSignal),
+          const placeSuggestionsFetched = await getPlaceSuggestions(
+            typedInput,
+            abortController.signal,
           );
+          setLoading(true);
+          if (placeSuggestionsFetched.length === 0) {
+            setResponseStatus("empty");
+          } else {
+            setResponseStatus("success");
+          }
+          setPlaceSuggestions(placeSuggestionsFetched);
         } catch (error: any) {
           if (error.name !== "AbortError") {
-            setNetworkError(true);
+            setResponseStatus("error");
             console.error(error);
           }
         } finally {
@@ -49,17 +57,17 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
       }, typingPause);
       setTypingTimeout(newTypingTimeout);
     }
+
     if (typedInput.length > 2) {
       fetchSuggestions();
     }
+
     return () => {
       abortController.abort();
     };
   }, [typedInput]);
 
-  if (typedInput.length < 3) return null;
-
-  if (networkError)
+  if (responseStatus === "error") {
     return (
       <NonSuggestions
         bgColor="bg-lavender-blush"
@@ -69,8 +77,9 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
         message="network connection error"
       />
     );
+  }
 
-  if (placeSuggestions.length === 0) {
+  if (responseStatus === "empty") {
     return (
       <NonSuggestions
         bgColor="bg-buttery-white"
@@ -82,23 +91,27 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
     );
   }
 
-  return (
-    <ul
-      className={`${containerClass} overflow-x-auto whitespace-nowrap bg-dew-green`}
-    >
-      {placeSuggestions.map((item, index) => {
-        const { place, timezone, latitude, longitude } = item;
-        const suggestionItemProps = {
-          typedInput: typedInput,
-          suggestion: place,
-          timezone: timezone,
-          latitude: latitude,
-          longitude: longitude,
-        };
-        return <SuggestionItem key={index} {...suggestionItemProps} />;
-      })}
-    </ul>
-  );
+  if (responseStatus === "success") {
+    return (
+      <ul
+        className={`${containerClass} overflow-x-auto whitespace-nowrap bg-dew-green`}
+      >
+        {placeSuggestions.map((item, index) => {
+          const { place, timezone, latitude, longitude } = item;
+          const suggestionItemProps = {
+            typedInput: typedInput,
+            suggestion: place,
+            timezone: timezone,
+            latitude: latitude,
+            longitude: longitude,
+          };
+          return <SuggestionItem key={index} {...suggestionItemProps} />;
+        })}
+      </ul>
+    );
+  }
+
+  return null;
 };
 
-export default Suggestions;
+export default memo(Suggestions);
