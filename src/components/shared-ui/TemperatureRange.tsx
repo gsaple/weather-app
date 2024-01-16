@@ -1,8 +1,8 @@
 import { type FC } from "react";
 
 interface TemperatureRangeProps {
-  low: number;
-  high: number;
+  low?: number;
+  high?: number;
   className?: string;
 }
 
@@ -11,7 +11,7 @@ const TemperatureRange: FC<TemperatureRangeProps> = ({
   high,
   className,
 }) => {
-  return <div className={className}>{`${low} ~ ${high}°`}</div>;
+  return low ? <div className={className}>{`${low} ~ ${high}°`}</div> : null;
 };
 
 export default TemperatureRange;

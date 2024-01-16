@@ -9,7 +9,9 @@ interface WeatherIconProps {
 }
 
 const WeatherIcon: FC<WeatherIconProps> = ({ src, alt, width, height }) => {
-  return <Image src={src} alt={alt} width={width} height={height} />;
+  return src.length > 0 ? (
+    <Image src={src} alt={alt} width={width} height={height} />
+  ) : null;
 };
 
 export default WeatherIcon;

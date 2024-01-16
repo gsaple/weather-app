@@ -9,11 +9,10 @@ interface OneOtherCityProps {
   iconAlt: string;
   cityBgSrc: string;
   cityBgAlt: string;
-  low: number;
-  high: number;
+  low?: number;
+  high?: number;
   cityName: string;
-  bgColor: string;
-  hoverShadowColor: string;
+  colorVariants: string;
 }
 
 const OneOtherCity: FC<OneOtherCityProps> = ({
@@ -24,15 +23,14 @@ const OneOtherCity: FC<OneOtherCityProps> = ({
   low,
   high,
   cityName,
-  bgColor,
-  hoverShadowColor,
+  colorVariants,
 }) => {
   return (
     <div
-      className={`relative flex h-[8.125rem] w-[10.5rem] flex-col items-center justify-center rounded-[1.25rem] sM:first:mb-4 sM:[&:nth-child(2)]:mb-4 ${bgColor} hover:shadow-xl ${hoverShadowColor}`}
+      className={`relative flex h-[8.125rem] w-[10.5rem] flex-col items-center justify-center rounded-[1.25rem] hover:shadow-xl sM:first:mb-4 sM:[&:nth-child(2)]:mb-4 ${colorVariants}`}
     >
       <BackgroundImage
-        className="absolute left-0 top-0 -z-50"
+        className="absolute left-0 top-0 -z-50 w-full"
         src={cityBgSrc}
         alt={cityBgAlt}
         originalWidth={168}
