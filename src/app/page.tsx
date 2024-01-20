@@ -1,5 +1,6 @@
 import WeatherCardWrapper from "@/components/WeatherCardWrapper";
 import BackgroundImage from "@/components/shared-ui/BackgroundImage";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -11,7 +12,27 @@ export default function Home() {
         originalWidth={264}
         originalHeight={255}
       />
-      <WeatherCardWrapper />
+      <Suspense
+        fallback={
+          <div className="fixed left-1/2 top-1/2 mx-1 w-screen max-w-sm -translate-x-1/2 -translate-y-1/2 transform rounded-md p-4 shadow">
+            <div className="flex animate-pulse items-center space-x-4">
+              <div className="h-10 w-10 rounded-full bg-slate-200"></div>
+              <div className="flex-1 space-y-6 py-1">
+                <div className="h-2 rounded bg-slate-200"></div>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="col-span-2 h-2 rounded bg-slate-200"></div>
+                    <div className="col-span-1 h-2 rounded bg-slate-200"></div>
+                  </div>
+                  <div className="h-2 rounded bg-slate-200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      >
+        <WeatherCardWrapper />
+      </Suspense>
     </div>
   );
 }
