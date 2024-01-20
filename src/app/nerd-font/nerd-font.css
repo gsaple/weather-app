@@ -41,3 +41,7 @@
 .nf-fa-warning:before {
   content: "\f071";
 }
+
+.nf-md-emoticon_sad_outline:before {
+  content: "\f01f8";
+}

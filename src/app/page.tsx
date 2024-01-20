@@ -1,4 +1,4 @@
-import WeatherCard from "@/components/WeatherCard";
+import WeatherCardWrapper from "@/components/WeatherCardWrapper";
 import BackgroundImage from "@/components/shared-ui/BackgroundImage";
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
         originalWidth={264}
         originalHeight={255}
       />
-      <WeatherCard />
+      <WeatherCardWrapper />
     </div>
   );
 }

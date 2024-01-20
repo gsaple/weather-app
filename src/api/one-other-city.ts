@@ -4,6 +4,7 @@ export interface OneOtherCityResponse {
   low: number;
   high: number;
   mainCondition: string;
+  name: string;
 }
 
 export async function getOneOtherCityInfo(
@@ -23,6 +24,7 @@ export async function getOneOtherCityInfo(
       low: Math.round(data.main.temp_min),
       high: Math.round(data.main.temp_max),
       mainCondition: formattedWeatherCondition(data.weather[0].main),
+      name: data.name,
     };
   } catch (error) {
     throw error;
