@@ -4,7 +4,7 @@ import CurrentCity from "./current-city/CurrentCity";
 import WeatherForecast from "./weather-forecast/WeatherForecast";
 import SearchBar from "./search-bar/SearchBar";
 import OtherCities from "./other-cities/OtherCities";
-import { OneOtherCityResponse } from "@/api/one-other-city";
+import { OneOtherCityResponse } from "@/server/one-other-city";
 
 interface WeatherCardProps {
   weatherForOtherCities: OneOtherCityResponse[];
