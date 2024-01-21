@@ -4,7 +4,7 @@ import {
   getOneOtherCityInfo,
   OneOtherCityResponse,
 } from "@/api/one-other-city";
-import { headers } from "next/headers";
+import { baseURL } from "@/app/api/base-url";
 
 const WeatherCardWrapper: FC = async () => {
   const queryForOtherCities = [
@@ -26,20 +26,17 @@ const WeatherCardWrapper: FC = async () => {
     console.error((error as Error).message);
   }
 
-  let ip = "0.0.0.0"; // fallback
-  const forwardedFor = headers().get("x-forwarded-for");
-
-  if (forwardedFor) {
-    ip = forwardedFor.split(",")[0] ?? ip;
-  } else {
-    ip = headers().get("x-real-ip") ?? ip;
-  }
+  console.log('baseURL:', baseURL);
+  const data = await fetch("/api/current-city/geo");
+  const { latitude, longitude } = await data.json();
 
   return resForOtherCities ? (
     <WeatherCard weatherForOtherCities={resForOtherCities} />
   ) : (
-    <div className="fixed left-1/2 top-1/2 -translate-x-[8.855rem] -translate-y-1/2 whitespace-nowrap pr-1 text-xl font-semibold text-slate-200">
-      <p>Failed to Get Weather Data {ip}</p>
+    <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap pr-1 text-xl font-semibold text-slate-200">
+      <p>
+        Failed to Get Weather Data {latitude} {longitude}
+      </p>
       <i className="nf nf-md-emoticon_sad_outline absolute left-[100%] top-1"></i>
     </div>
   );
