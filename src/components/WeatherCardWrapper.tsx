@@ -4,7 +4,7 @@ import {
   getOneOtherCityInfo,
   OneOtherCityResponse,
 } from "@/api/one-other-city";
-import { baseURL } from "@/app/api/base-url";
+import { getCurrentPlaceGeo } from "@/server/current-place-geo";
 
 const WeatherCardWrapper: FC = async () => {
   const queryForOtherCities = [
@@ -26,9 +26,7 @@ const WeatherCardWrapper: FC = async () => {
     console.error((error as Error).message);
   }
 
-  console.log('baseURL:', baseURL);
-  const data = await fetch("/api/current-city/geo");
-  const { latitude, longitude } = await data.json();
+  const { latitude, longitude } = getCurrentPlaceGeo();
 
   return resForOtherCities ? (
     <WeatherCard weatherForOtherCities={resForOtherCities} />
