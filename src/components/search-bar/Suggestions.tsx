@@ -2,10 +2,13 @@ import { type FC } from "react";
 import { useEffect, useState, memo } from "react";
 import SuggestionItem from "./suggestion/SuggestionItem";
 import NonSuggestions from "./NonSuggestions";
-import {
-  SuggestedPlaceInfo,
-  getPlaceSuggestions,
-} from "../../api/place-suggestions";
+
+interface SuggestedPlaceInfo {
+  place: string;
+  timezone: string;
+  latitude: number;
+  longitude: number;
+}
 
 interface SuggestionProps {
   typedInput: string;
@@ -35,11 +38,22 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
       const newTypingTimeout = setTimeout(async () => {
         try {
           setLoading(true);
-          const placeSuggestionsFetched = await getPlaceSuggestions(
-            typedInput,
-            abortController.signal,
+          const response = await fetch(
+            `/api/place-autocomplete?input=${typedInput}`,
+            {
+              signal: abortController.signal,
+            },
           );
-          setLoading(true);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const placeSuggestionsFetched = await response.json();
+
+          if (placeSuggestionsFetched.error)
+            throw new Error("Possible Invalid Api Key");
+
           if (placeSuggestionsFetched.length === 0) {
             setResponseStatus("empty");
           } else {
