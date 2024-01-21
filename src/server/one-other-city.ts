@@ -13,7 +13,9 @@ export async function getOneOtherCityInfo(
 ): Promise<OneOtherCityResponse> {
   try {
     const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${process.env.OpenWeatherApiKey}`;
-    const response = await fetch(apiURL, { next: { revalidate: 60 } });
+    const response = await fetch(apiURL, {
+      next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 86400},
+    });
     if (!response.ok) {
       throw new Error(
         `weather API request failed with status ${response.status}`,

@@ -3,7 +3,7 @@ import WeatherCard from "./WeatherCard";
 import {
   getOneOtherCityInfo,
   OneOtherCityResponse,
-} from "@/api/one-other-city";
+} from "@/server/one-other-city";
 import { getCurrentPlaceGeo } from "@/server/current-place-geo";
 
 const WeatherCardWrapper: FC = async () => {
@@ -26,15 +26,11 @@ const WeatherCardWrapper: FC = async () => {
     console.error((error as Error).message);
   }
 
-  const { latitude, longitude } = getCurrentPlaceGeo();
-
   return resForOtherCities ? (
     <WeatherCard weatherForOtherCities={resForOtherCities} />
   ) : (
     <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap pr-1 text-xl font-semibold text-slate-200">
-      <p>
-        Failed to Get Weather Data {latitude} {longitude}
-      </p>
+      <p>Failed to Get Weather Data</p>
       <i className="nf nf-md-emoticon_sad_outline absolute left-[100%] top-1"></i>
     </div>
   );

@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import OneOtherCity from "./one-other-city/OneOtherCity";
-import { OneOtherCityResponse } from "@/api/one-other-city";
+import { OneOtherCityResponse } from "@/server/one-other-city";
 import { colorVariants } from "@/util/color-variants";
 
 interface OtherCitiesProps {
