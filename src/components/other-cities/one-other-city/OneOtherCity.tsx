@@ -9,8 +9,8 @@ interface OneOtherCityProps {
   iconAlt: string;
   cityBgSrc: string;
   cityBgAlt: string;
-  low?: number;
-  high?: number;
+  low: number;
+  high: number;
   cityName: string;
   colorVariants: string;
 }
