@@ -14,8 +14,10 @@ interface ApiResultRelevant {
 export async function GET(request: NextRequest) {
   // e.g. /api/place-autocomplete?input=hello
   const input = request.nextUrl.searchParams.get("input");
+  const countryCode = request.geo?.country ?? "us";
+  console.log("countryCode: ", countryCode);
 
-  const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&format=json&limit=6&apiKey=${process.env.GeoapifyApiKey}`;
+  const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&format=json&limit=6&bias=${countryCode}&apiKey=${process.env.GeoapifyApiKey}`;
 
   try {
     const response = await fetch(geoApiUrl);
