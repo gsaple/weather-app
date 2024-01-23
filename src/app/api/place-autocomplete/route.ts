@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 
 interface ApiResultRelevant {
   result_type: string;
@@ -14,7 +15,7 @@ interface ApiResultRelevant {
 export async function GET(request: NextRequest) {
   // e.g. /api/place-autocomplete?input=hello
   const input = request.nextUrl.searchParams.get("input");
-  const countryCode = request.geo?.country ?? "us";
+  const countryCode = headers().get("x-vercel-ip-country") ?? "us";
   console.log("countryCode: ", countryCode);
 
   const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&format=json&limit=6&bias=${countryCode}&apiKey=${process.env.GeoapifyApiKey}`;
