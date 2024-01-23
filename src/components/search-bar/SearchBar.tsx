@@ -13,7 +13,11 @@ const SearchBar: FC = () => {
   }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.currentTarget.value);
+    let inputText = event.currentTarget.value;
+    const alphabetPattern = /^[A-Za-z\s]*$/;
+    if (alphabetPattern.test(inputText)) {
+      setInputValue(inputText);
+    }
   };
 
   const onCloseClicked = () => {

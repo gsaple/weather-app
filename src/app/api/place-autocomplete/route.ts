@@ -15,10 +15,8 @@ interface ApiResultRelevant {
 export async function GET(request: NextRequest) {
   // e.g. /api/place-autocomplete?input=hello
   const input = request.nextUrl.searchParams.get("input");
-  const countryCode = headers().get("x-vercel-ip-country") ?? "us";
-  console.log("countryCode: ", countryCode);
-
-  const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&format=json&limit=6&bias=${countryCode}&apiKey=${process.env.GeoapifyApiKey}`;
+  const countryCode = headers().get("x-vercel-ip-country")?.toLowerCase() ?? "au";
+  const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&format=json&limit=6&bias=countrycode:${countryCode}&apiKey=${process.env.GeoapifyApiKey}`;
 
   try {
     const response = await fetch(geoApiUrl);
@@ -32,7 +30,8 @@ export async function GET(request: NextRequest) {
           (result.result_type === "city" ||
             result.result_type === "suburb" ||
             result.result_type === "state" ||
-            result.result_type == "district") &&
+            result.result_type == "district" ||
+            result.result_type == "postcode") &&
           result.category !== "political",
       )
       .map((result: ApiResultRelevant) => {
