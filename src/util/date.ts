@@ -1,5 +1,20 @@
-export function dateFormat(date: Date): string[] {
-  return date
+interface TimeInfo {
+  dayAndMonth: string;
+  weekDay: string;
+  time: string;
+}
+
+export function dateFormat(shiftsFromUTC: number): TimeInfo {
+  const localDate = new Date();
+
+  // this offset is in minutes
+  const timezoneOffset = localDate.getTimezoneOffset();
+
+  // number of milliseconds since the epoch, at the place of interest
+  const utcTimeMilliseconds =
+    localDate.getTime() + (timezoneOffset * 60 + shiftsFromUTC) * 1000;
+
+  const dateFormatOfQueryPlace = new Date(utcTimeMilliseconds)
     .toLocaleString("default", {
       day: "numeric",
       month: "long",
@@ -8,4 +23,10 @@ export function dateFormat(date: Date): string[] {
       minute: "numeric",
     })
     .split(/, | at /);
+
+  return {
+    dayAndMonth: dateFormatOfQueryPlace[1],
+    weekDay: dateFormatOfQueryPlace[0],
+    time: dateFormatOfQueryPlace[2],
+  };
 }

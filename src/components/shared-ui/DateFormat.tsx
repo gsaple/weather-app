@@ -1,30 +1,26 @@
 import { type FC } from "react";
+import { dateFormat } from "@/util/date";
 
-interface DateFormatProps {
-  dayAndMonth: string;
-  weekDay: string;
-  time?: string;
-  className?: string;
+export interface DateFormatProps {
+  shiftsFromUTC: number;
+  showCurrentTime: boolean;
 }
 
 const DateFormat: FC<DateFormatProps> = ({
-  dayAndMonth,
-  weekDay,
-  time,
-  className,
+  shiftsFromUTC,
+  showCurrentTime,
 }) => {
-  return (
-    <div className={className}>
-      {time ? (
-        <div>{`${dayAndMonth}, ${weekDay} ${time}`}</div>
-      ) : (
-        <div>
-          <div className="text-2xl font-semibold">{weekDay}</div>
-          <p className="text-center text-sm font-medium text-zinc-800">
-            {dayAndMonth}
-          </p>
-        </div>
-      )}
+  const { dayAndMonth, weekDay, time } = dateFormat(shiftsFromUTC);
+  return showCurrentTime ? (
+    <div className="z-10 ml-6 self-start text-white">
+      <div>{`${dayAndMonth}, ${weekDay} ${time}`}</div>
+    </div>
+  ) : (
+    <div>
+      <div className="text-2xl font-semibold">{weekDay}</div>
+      <p className="text-center text-sm font-medium text-zinc-800">
+        {dayAndMonth}
+      </p>
     </div>
   );
 };
