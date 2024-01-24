@@ -4,10 +4,10 @@ import CurrentCity from "./current-city/CurrentCity";
 import WeatherForecast from "./weather-forecast/WeatherForecast";
 import SearchBar from "./search-bar/SearchBar";
 import OtherCities from "./other-cities/OtherCities";
-import { OneOtherCityResponse } from "@/server/one-other-city";
+import { OneOtherCityProps } from "./other-cities/one-other-city/OneOtherCity";
 
 interface WeatherCardProps {
-  weatherForOtherCities: OneOtherCityResponse[];
+  weatherForOtherCities: OneOtherCityProps[];
 }
 
 const WeatherCard: FC<WeatherCardProps> = ({ weatherForOtherCities }) => {

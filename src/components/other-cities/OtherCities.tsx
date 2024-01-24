@@ -1,10 +1,9 @@
 import { type FC } from "react";
 import OneOtherCity from "./one-other-city/OneOtherCity";
-import { OneOtherCityResponse } from "@/server/one-other-city";
-import { colorVariants } from "@/util/color-variants";
+import { OneOtherCityProps } from "./one-other-city/OneOtherCity";
 
 interface OtherCitiesProps {
-  weatherForOtherCities: OneOtherCityResponse[];
+  weatherForOtherCities: OneOtherCityProps[];
 }
 
 const OtherCities: FC<OtherCitiesProps> = ({ weatherForOtherCities }) => {
@@ -14,14 +13,9 @@ const OtherCities: FC<OtherCitiesProps> = ({ weatherForOtherCities }) => {
         return (
           <OneOtherCity
             key={index}
-            iconSrc={`/weather-icons/${oneCity.mainCondition}.png`}
-            iconAlt={`${oneCity.mainCondition} icon`}
-            cityBgSrc={`/backgrounds/${oneCity.name}.png`}
-            cityBgAlt={`${oneCity.name} bg`}
-            low={oneCity.low}
-            high={oneCity.high}
-            cityName={oneCity.name}
-            colorVariants={colorVariants[oneCity.mainCondition]}
+            mainCondition={oneCity.mainCondition}
+            temperature={oneCity.temperature}
+            cityName={oneCity.cityName}
           />
         );
       })}
