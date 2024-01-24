@@ -8,3 +8,14 @@ export const colorVariants: { [key: string]: string } = {
   snow: "bg-fuchsia-500/50 hover:shadow-fuchsia-500/50",
   atmosphere: "bg-rose-500/50 hover:shadow-rose-500/50",
 };
+
+export const colorVariantsWithoutShadow: { [key: string]: string } = {
+  404: "bg-cyan-500",
+  clear: "bg-sky-500",
+  clouds: "bg-blue-500",
+  drizzle: "bg-indigo-500",
+  rain: "bg-violet-500",
+  thunderstorm: "bg-purple-500",
+  snow: "bg-fuchsia-500",
+  atmosphere: "bg-rose-500",
+};

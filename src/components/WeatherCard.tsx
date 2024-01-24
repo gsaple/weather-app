@@ -5,16 +5,21 @@ import WeatherForecast from "./weather-forecast/WeatherForecast";
 import SearchBar from "./search-bar/SearchBar";
 import OtherCities from "./other-cities/OtherCities";
 import { OneOtherCityProps } from "./other-cities/one-other-city/OneOtherCity";
+import { CurrentCityProps } from "./current-city/CurrentCity";
 
 interface WeatherCardProps {
+  weatherForCurrentCity: CurrentCityProps;
   weatherForOtherCities: OneOtherCityProps[];
 }
 
-const WeatherCard: FC<WeatherCardProps> = ({ weatherForOtherCities }) => {
+const WeatherCard: FC<WeatherCardProps> = ({
+  weatherForCurrentCity,
+  weatherForOtherCities,
+}) => {
   return (
     <div className="z-10 mx-auto h-3/4 rounded-[3.0rem] bg-slate-50/90 sm:grid sm:max-h-[46.875rem] sm:min-h-[51.25rem] sm:w-[48.5rem] sm:grid-cols-2 sm:grid-rows-9 lg:min-h-[43.125rem] lg:w-4/5 lg:min-w-[72rem] lg:grid-cols-16 lg:grid-rows-6 sM:flex sM:min-h-[96rem] sM:w-[24.25rem] sM:flex-col sM:items-center sM:space-y-5">
       <div className="mt-7 sm:col-span-1 sm:row-span-7 sm:justify-self-center lg:col-span-5 lg:row-span-6 lg:mb-7 lg:justify-self-end">
-        <CurrentCity />
+        <CurrentCity {...weatherForCurrentCity} />
       </div>
       <div className="sm:col-span-1 sm:row-span-6 sm:mr-7 sm:content-between sm:self-end lg:col-span-11 lg:row-span-3 lg:mx-9 lg:self-center sM:w-[22.25rem]">
         <WeatherForecast />
