@@ -6,14 +6,17 @@ import SearchBar from "./search-bar/SearchBar";
 import OtherCities from "./other-cities/OtherCities";
 import { OneOtherCityProps } from "./other-cities/one-other-city/OneOtherCity";
 import { CurrentCityProps } from "./current-city/CurrentCity";
+import { OneDayForecastProps } from "./weather-forecast/one-day-forecast/OneDayForecast";
 
 interface WeatherCardProps {
   weatherForCurrentCity: CurrentCityProps;
+  forecastForCurrentCity: OneDayForecastProps[];
   weatherForOtherCities: OneOtherCityProps[];
 }
 
 const WeatherCard: FC<WeatherCardProps> = ({
   weatherForCurrentCity,
+  forecastForCurrentCity,
   weatherForOtherCities,
 }) => {
   return (
@@ -22,7 +25,7 @@ const WeatherCard: FC<WeatherCardProps> = ({
         <CurrentCity {...weatherForCurrentCity} />
       </div>
       <div className="sm:col-span-1 sm:row-span-6 sm:mr-7 sm:content-between sm:self-end lg:col-span-11 lg:row-span-3 lg:mx-9 lg:self-center sM:w-[22.25rem]">
-        <WeatherForecast />
+        <WeatherForecast forecastForCurrentCity={forecastForCurrentCity} />
       </div>
       <div className="sm:col-span-1 sm:row-span-1 sm:mr-7 sm:self-end lg:col-span-11 lg:row-span-1 lg:mx-9 sM:w-[22.25rem] ">
         <SearchBar />

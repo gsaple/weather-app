@@ -3,6 +3,7 @@ import WeatherCard from "./WeatherCard";
 import { getOneOtherCityInfo } from "@/server/one-other-city-data";
 import { getCurrentPlaceGeo } from "@/server/current-place-geo";
 import { getCurrentPlaceInfo } from "@/server/current-place-data";
+import { getCurrentPlaceForecast } from "@/server/current-place-forecast";
 
 const WeatherCardWrapper: FC = async () => {
   const queryForOtherCities = [
@@ -20,11 +21,17 @@ const WeatherCardWrapper: FC = async () => {
 
   const currentPlaceWeatherPromise = getCurrentPlaceInfo(latitude, longitude);
 
+  const currentPlaceForecastPromise = getCurrentPlaceForecast(
+    latitude,
+    longitude,
+  );
+
   let initialData = undefined;
 
   try {
     initialData = await Promise.all([
       currentPlaceWeatherPromise,
+      currentPlaceForecastPromise,
       ...otherCitiesPromises,
     ]);
   } catch (error) {
@@ -32,10 +39,15 @@ const WeatherCardWrapper: FC = async () => {
   }
 
   if (initialData) {
-    const [weatherForCurrentCity, ...weatherForOtherCities] = initialData;
+    const [
+      weatherForCurrentCity,
+      forecastForCurrentCity,
+      ...weatherForOtherCities
+    ] = initialData;
     return (
       <WeatherCard
         weatherForCurrentCity={weatherForCurrentCity}
+        forecastForCurrentCity={forecastForCurrentCity}
         weatherForOtherCities={weatherForOtherCities}
       />
     );
