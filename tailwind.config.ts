@@ -42,6 +42,8 @@ const config: Config = {
         "spruce-green": "#166534",
         "silver-sand": "#c1c1c1",
         "crystal-blue": "#60a5fA",
+        "grey-olive": "#aba69c",
+        "nile-blue": "#1d2e48",
       },
     },
   },

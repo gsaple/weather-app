@@ -5,8 +5,8 @@ export const colorVariants: { [key: string]: string } = {
   drizzle: "bg-indigo-500/50 hover:shadow-indigo-500/50",
   rain: "bg-violet-500/50 hover:shadow-violet-500/50",
   thunderstorm: "bg-purple-500/50 hover:shadow-purple-500/50",
-  snow: "bg-fuchsia-500/50 hover:shadow-fuchsia-500/50",
-  atmosphere: "bg-rose-500/50 hover:shadow-rose-500/50",
+  snow: "bg-nile-blue/50 hover:shadow-nile-blue/50",
+  atmosphere: "bg-grey-olive/50 hover:shadow-grey-olive/50",
 };
 
 export const colorVariantsWithoutShadow: { [key: string]: string } = {
@@ -16,6 +16,6 @@ export const colorVariantsWithoutShadow: { [key: string]: string } = {
   drizzle: "bg-indigo-500",
   rain: "bg-violet-500",
   thunderstorm: "bg-purple-500",
-  snow: "bg-fuchsia-500",
-  atmosphere: "bg-rose-500",
+  snow: "bg-nile-blue",
+  atmosphere: "bg-grey-olive",
 };
