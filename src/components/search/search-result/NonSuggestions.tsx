@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { containerClass } from "./Suggestions";
+import { containerClass } from "../SearchResult";
 
 interface NonSuggestionsProps {
   bgColor: string;

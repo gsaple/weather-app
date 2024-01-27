@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, memo } from "react";
 import OneOtherCity from "./one-other-city/OneOtherCity";
 import { OneOtherCityProps } from "./one-other-city/OneOtherCity";
 
@@ -23,4 +23,4 @@ const OtherCities: FC<OtherCitiesProps> = ({ weatherForOtherCities }) => {
   );
 };
 
-export default OtherCities;
+export default memo(OtherCities);

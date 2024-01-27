@@ -5,9 +5,6 @@ interface ApiResultRelevant {
   result_type: string;
   formatted: string;
   category: string;
-  timezone: {
-    name: string;
-  };
   lon: number;
   lat: number;
 }
@@ -15,7 +12,8 @@ interface ApiResultRelevant {
 export async function GET(request: NextRequest) {
   // e.g. /api/place-autocomplete?input=hello
   const input = request.nextUrl.searchParams.get("input");
-  const countryCode = headers().get("x-vercel-ip-country")?.toLowerCase() ?? "au";
+  const countryCode =
+    headers().get("x-vercel-ip-country")?.toLowerCase() ?? "au";
   const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&format=json&limit=6&bias=countrycode:${countryCode}&apiKey=${process.env.GeoapifyApiKey}`;
 
   try {
@@ -37,7 +35,6 @@ export async function GET(request: NextRequest) {
       .map((result: ApiResultRelevant) => {
         return {
           place: result.formatted,
-          timezone: result.timezone.name,
           longitude: result.lon,
           latitude: result.lat,
         };

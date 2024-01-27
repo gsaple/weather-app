@@ -1,26 +1,33 @@
 import { type FC } from "react";
 import { useEffect, useState, memo } from "react";
-import SuggestionItem from "./suggestion/SuggestionItem";
-import NonSuggestions from "./NonSuggestions";
+import SuggestionItem from "./search-result/SuggestionItem";
+import NonSuggestions from "./search-result/NonSuggestions";
+import { type GeoLocation } from "../WeatherCard";
 
 interface SuggestedPlaceInfo {
   place: string;
-  timezone: string;
   latitude: number;
   longitude: number;
 }
 
-interface SuggestionProps {
+interface SearchResultProps {
   typedInput: string;
-  setLoading: (loadingStatus: boolean) => void;
+  setIsSearching: (isSearching: boolean) => void;
+  setGeo: (coordinates: GeoLocation) => void;
+  setInput: (input: string) => void;
 }
 
 type StatusType = "" | "error" | "empty" | "success";
 
 export const containerClass: string =
-  "absolute top-[100%] z-10 mt-2 w-full rounded-lg py-1 font-medium";
+  "absolute top-[100%] z-10 mt-2 lg:w-2/4 sM:z-20 rounded-lg py-1 font-medium";
 
-const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
+const SearchResult: FC<SearchResultProps> = ({
+  typedInput,
+  setIsSearching,
+  setGeo,
+  setInput,
+}) => {
   const [placeSuggestions, setPlaceSuggestions] = useState<
     SuggestedPlaceInfo[]
   >([]);
@@ -37,7 +44,7 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
       if (typingTimeout) clearTimeout(typingTimeout);
       const newTypingTimeout = setTimeout(async () => {
         try {
-          setLoading(true);
+          setIsSearching(true);
           const response = await fetch(
             `/api/place-autocomplete?input=${typedInput}`,
             {
@@ -66,7 +73,7 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
             console.error(error);
           }
         } finally {
-          setLoading(false);
+          setIsSearching(false);
         }
       }, typingPause);
       setTypingTimeout(newTypingTimeout);
@@ -74,6 +81,8 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
 
     if (typedInput.length > 2) {
       fetchSuggestions();
+    } else {
+      setResponseStatus("");
     }
 
     return () => {
@@ -111,13 +120,14 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
         className={`${containerClass} overflow-x-auto whitespace-nowrap bg-dew-green`}
       >
         {placeSuggestions.map((item, index) => {
-          const { place, timezone, latitude, longitude } = item;
+          const { place, latitude, longitude } = item;
           const suggestionItemProps = {
             typedInput: typedInput,
             suggestion: place,
-            timezone: timezone,
             latitude: latitude,
             longitude: longitude,
+            setGeo: setGeo,
+            setInput: setInput,
           };
           return <SuggestionItem key={index} {...suggestionItemProps} />;
         })}
@@ -128,4 +138,4 @@ const Suggestions: FC<SuggestionProps> = ({ typedInput, setLoading }) => {
   return null;
 };
 
-export default memo(Suggestions);
+export default memo(SearchResult);

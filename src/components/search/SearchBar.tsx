@@ -1,17 +1,18 @@
-import { type FC } from "react";
-import { useState, useCallback } from "react";
-import Suggestions from "./Suggestions";
+import { type FC, useState, memo } from "react";
 import Spinner from "../shared-ui/Spinner";
 
-const SearchBar: FC = () => {
-  const [inputValue, setInputValue] = useState<string>("");
+interface SearchBarProps {
+  inputValue: string;
+  isSearching: boolean;
+  setInputValue: (inputValue: string) => void;
+}
+
+const SearchBar: FC<SearchBarProps> = ({
+  inputValue,
+  isSearching,
+  setInputValue,
+}) => {
   const [showCancel, setShowCancel] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const cachedSetIsLoading = useCallback((loadingStatus: boolean) => {
-    setIsLoading(loadingStatus);
-  }, []);
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let inputText = event.currentTarget.value;
     const alphabetPattern = /^[A-Za-z\s]*$/;
@@ -32,7 +33,7 @@ const SearchBar: FC = () => {
   return (
     <div className="flex lg:w-2/4">
       <div className="relative grow">
-        {isLoading ? (
+        {isSearching ? (
           <Spinner className="absolute left-1 top-2.5 h-4 w-4 text-crystal-blue" />
         ) : (
           <i className="nf nf-fa-search absolute left-1 top-2.5 text-cadet-grey"></i>
@@ -56,12 +57,6 @@ const SearchBar: FC = () => {
             onClick={onCloseClicked}
           ></i>
         )}
-        {inputValue && (
-          <Suggestions
-            typedInput={inputValue}
-            setLoading={cachedSetIsLoading}
-          />
-        )}
       </div>
       {showCancel && (
         <button
@@ -75,4 +70,4 @@ const SearchBar: FC = () => {
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);

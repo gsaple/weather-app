@@ -1,16 +1,22 @@
 import { type FC } from "react";
+import { type GeoLocation } from "@/components/WeatherCard";
 
 interface SuggestionItemProps {
   typedInput: string;
   suggestion: string;
-  timezone: string;
   latitude: number;
   longitude: number;
+  setGeo: (coordinates: GeoLocation) => void;
+  setInput: (input: string) => void;
 }
 
 const SuggestionItem: FC<SuggestionItemProps> = ({
   typedInput,
   suggestion,
+  latitude,
+  longitude,
+  setGeo,
+  setInput,
 }) => {
   const typedInputStartIndex: number = suggestion
     .toLowerCase()
@@ -19,7 +25,16 @@ const SuggestionItem: FC<SuggestionItemProps> = ({
   const typedInputFound: boolean = typedInputStartIndex !== -1;
 
   return (
-    <li className="min-w-max hover:bg-silver-sand">
+    <li
+      className="min-w-max hover:bg-silver-sand"
+      onClick={() => {
+        setGeo({
+          latitude: latitude.toString(),
+          longitude: longitude.toString(),
+        });
+        setInput("");
+      }}
+    >
       <i className="nf nf-md-map_marker_radius mx-1 text-algae-green"></i>
       {typedInputFound ? (
         <>
