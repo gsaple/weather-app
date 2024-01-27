@@ -49,7 +49,7 @@ const SearchBar: FC<SearchBarProps> = ({
           }}
           placeholder="Search for a city"
           spellCheck={false}
-          className="w-full rounded-lg py-2 pl-6 text-sm font-medium text-zinc-800 outline-none placeholder:font-medium placeholder:italic"
+          className="tap-highlight-none w-full rounded-lg py-2 pl-6 text-sm font-medium text-zinc-800 outline-none placeholder:font-medium placeholder:italic"
         />
         {inputValue && (
           <i
@@ -60,7 +60,7 @@ const SearchBar: FC<SearchBarProps> = ({
       </div>
       {showCancel && (
         <button
-          className="ml-2 font-medium text-cadet-grey"
+          className="tap-highlight-none ml-2 font-medium text-cadet-grey"
           onClick={onCancelClicked}
         >
           Cancel
