@@ -1,6 +1,7 @@
 import WeatherCardWrapper from "@/components/WeatherCardWrapper";
 import BackgroundImage from "@/components/shared-ui/BackgroundImage";
 import { Suspense } from "react";
+import CenterPortContainer from "@/components/shared-ui/CenterPortContainer";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
       />
       <Suspense
         fallback={
-          <div className="fixed left-1/2 top-1/2 mx-1 w-screen max-w-sm -translate-x-1/2 -translate-y-1/2 transform rounded-md p-4 shadow">
+          <CenterPortContainer className="mx-1 w-screen max-w-sm rounded-md p-4 shadow">
             <div className="flex animate-pulse items-center space-x-4">
               <div className="h-10 w-10 rounded-full bg-slate-200"></div>
               <div className="flex-1 space-y-6 py-1">
@@ -28,7 +29,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </CenterPortContainer>
         }
       >
         <WeatherCardWrapper />

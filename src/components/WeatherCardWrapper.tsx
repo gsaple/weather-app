@@ -4,6 +4,7 @@ import { getOneOtherCityInfo } from "@/server/one-other-city-data";
 import { getCurrentPlaceGeo } from "@/server/current-place-geo";
 import { getCurrentPlaceInfo } from "@/server/current-place-data";
 import { getCurrentPlaceForecast } from "@/server/current-place-forecast";
+import CenterPortContainer from "./shared-ui/CenterPortContainer";
 
 const WeatherCardWrapper: FC = async () => {
   const queryForOtherCities = [
@@ -54,10 +55,10 @@ const WeatherCardWrapper: FC = async () => {
   }
 
   return (
-    <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap pr-1 text-xl font-semibold text-slate-200">
+    <CenterPortContainer className="whitespace-nowrap pr-1 text-xl font-semibold text-slate-200">
       <p>Failed to Get Weather Data</p>
       <i className="nf nf-md-emoticon_sad_outline absolute left-[100%] top-1"></i>
-    </div>
+    </CenterPortContainer>
   );
 };
 
