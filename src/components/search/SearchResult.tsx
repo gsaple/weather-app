@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { useEffect, useState, memo } from "react";
-import SuggestionItem from "./search-result/SuggestionItem";
+import Suggestions from "./search-result/Suggestions";
 import NonSuggestions from "./search-result/NonSuggestions";
 import { type GeoLocation } from "../WeatherCard";
 
@@ -115,24 +115,15 @@ const SearchResult: FC<SearchResultProps> = ({
   }
 
   if (responseStatus === "success") {
-    return (
-      <ul
-        className={`${containerClass} overflow-x-auto whitespace-nowrap bg-dew-green`}
-      >
-        {placeSuggestions.map((item, index) => {
-          const { place, latitude, longitude } = item;
-          const suggestionItemProps = {
-            typedInput: typedInput,
-            suggestion: place,
-            latitude: latitude,
-            longitude: longitude,
-            setGeo: setGeo,
-            setInput: setInput,
-          };
-          return <SuggestionItem key={index} {...suggestionItemProps} />;
-        })}
-      </ul>
-    );
+    const suggestionsProps = placeSuggestions.map((placeSuggestion) => ({
+      typedInput: typedInput,
+      suggestion: placeSuggestion.place,
+      latitude: placeSuggestion.latitude,
+      longitude: placeSuggestion.longitude,
+      setGeo: setGeo,
+      setInput: setInput,
+    }));
+    return <Suggestions suggestionsProps={suggestionsProps} />;
   }
 
   return null;

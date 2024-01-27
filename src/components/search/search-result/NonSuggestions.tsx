@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { containerClass } from "../SearchResult";
+import ResultContainer from "./ResultContainer";
 
 interface NonSuggestionsProps {
   bgColor: string;
@@ -17,10 +17,10 @@ const NonSuggestions: FC<NonSuggestionsProps> = ({
   message,
 }) => {
   return (
-    <div className={`${containerClass} ${bgColor}`}>
+    <ResultContainer className={bgColor}>
       <i className={`nf mx-1 ${iconName} ${iconColor}`}></i>
       <span className={`pr-2 ${textColor}`}>{message}</span>
-    </div>
+    </ResultContainer>
   );
 };
 

@@ -1,7 +1,7 @@
 import { type FC } from "react";
 import { type GeoLocation } from "@/components/WeatherCard";
 
-interface SuggestionItemProps {
+export interface SuggestionItemProps {
   typedInput: string;
   suggestion: string;
   latitude: number;
