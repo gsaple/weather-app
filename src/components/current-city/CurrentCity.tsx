@@ -1,5 +1,4 @@
 import { type FC } from "react";
-import DateFormat from "../shared-ui/DateFormat";
 import CityName from "../shared-ui/CityName";
 import Temperature from "./Temperature";
 import WeatherIcon from "../shared-ui/WeatherIcon";
@@ -7,6 +6,7 @@ import BackgroundImage from "../shared-ui/BackgroundImage";
 import OtherMetrics from "./OtherMetrics";
 import { colorVariantsWithoutShadow } from "@/util/color-variants";
 import { OtherMetricsProps } from "./OtherMetrics";
+import dynamic from "next/dynamic";
 
 export interface CurrentCityProps {
   mainCondition: string;
@@ -15,6 +15,10 @@ export interface CurrentCityProps {
   temperature: { value: number; low: number; high: number };
   otherMetrics: OtherMetricsProps;
 }
+
+const DateFormat = dynamic(() => import("../shared-ui/DateFormat"), {
+  ssr: false,
+});
 
 const CurrentCity: FC<CurrentCityProps> = ({
   mainCondition,

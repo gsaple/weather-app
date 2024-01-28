@@ -1,13 +1,17 @@
 import { type FC } from "react";
-import DateFormat from "../../shared-ui/DateFormat";
 import BackgroundImage from "@/components/shared-ui/BackgroundImage";
 import TemperatureRange from "../../shared-ui/TemperatureRange";
+import dynamic from "next/dynamic";
 
 export interface OneDayForecastProps {
   mainCondition: string;
   shiftsFromUTC: number;
   temperature: { low: number; high: number };
 }
+
+const DateFormat = dynamic(() => import("../../shared-ui/DateFormat"), {
+  ssr: false,
+});
 
 const OneDayForecast: FC<OneDayForecastProps> = ({
   mainCondition,
