@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useState, useEffect } from "react";
 import { dateFormat } from "@/util/date";
 
 export interface DateFormatProps {
@@ -6,20 +6,42 @@ export interface DateFormatProps {
   showCurrentTime: boolean;
 }
 
+export interface TimeInfo {
+  dayAndMonth: string;
+  weekDay: string;
+  time: string;
+}
+
 const DateFormat: FC<DateFormatProps> = ({
   shiftsFromUTC,
   showCurrentTime,
 }) => {
-  const { dayAndMonth, weekDay, time } = dateFormat(shiftsFromUTC);
+  const [timeInfo, setTimeInfo] = useState<TimeInfo>(dateFormat(shiftsFromUTC));
+
+  useEffect(() => {
+    let timerID: NodeJS.Timeout;
+    if (showCurrentTime) {
+      setTimeInfo(dateFormat(shiftsFromUTC));
+      timerID = setInterval(() => {
+        setTimeInfo(dateFormat(shiftsFromUTC));
+      }, 1000);
+    }
+    return () => {
+      if (showCurrentTime) {
+        clearInterval(timerID);
+      }
+    };
+  }, [shiftsFromUTC]);
+
   return showCurrentTime ? (
     <div className="z-10 ml-6 self-start text-white">
-      <div>{`${dayAndMonth}, ${weekDay} ${time}`}</div>
+      <div>{`${timeInfo.dayAndMonth}, ${timeInfo.weekDay} ${timeInfo.time}`}</div>
     </div>
   ) : (
     <div>
-      <div className="text-2xl font-semibold">{weekDay}</div>
+      <div className="text-2xl font-semibold">{timeInfo.weekDay}</div>
       <p className="text-center text-sm font-medium text-zinc-800">
-        {dayAndMonth}
+        {timeInfo.dayAndMonth}
       </p>
     </div>
   );

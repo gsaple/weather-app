@@ -1,13 +1,9 @@
-interface TimeInfo {
-  dayAndMonth: string;
-  weekDay: string;
-  time: string;
-}
+import { TimeInfo } from "@/components/shared-ui/DateFormat";
 
 export function dateFormat(shiftsFromUTC: number): TimeInfo {
   const localDate = new Date();
 
-  // this offset is in minutes
+  // this offset is in minutes, this has the opposite sign to shiftsFromUTC received here
   const timezoneOffset = localDate.getTimezoneOffset();
 
   // number of milliseconds since the epoch, at the place of interest
@@ -21,6 +17,7 @@ export function dateFormat(shiftsFromUTC: number): TimeInfo {
       weekday: "long",
       hour: "numeric",
       minute: "numeric",
+      second: "numeric",
     })
     .split(/, | at /);
 
