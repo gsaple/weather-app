@@ -47,7 +47,7 @@ const SearchBar: FC<SearchBarProps> = ({
           onFocus={() => {
             setShowCancel(true);
           }}
-          placeholder="Search for a city"
+          placeholder="Search for a place"
           spellCheck={false}
           className="tap-highlight-none w-full rounded-lg py-2 pl-6 text-sm font-medium text-zinc-800 outline-none placeholder:font-medium placeholder:italic"
         />

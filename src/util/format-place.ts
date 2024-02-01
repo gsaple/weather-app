@@ -3,9 +3,10 @@ export function formattedPlace(
   city: string | undefined,
   state: string | undefined,
   country: string,
-  postcode: string,
+  postcode: string | undefined,
 ): string {
-  const parts: string[] = [country, postcode];
+  const parts: string[] = [country];
+  if (postcode) parts.push(postcode);
   if (state) parts.unshift(state);
   if (city && city !== state) parts.unshift(city);
   if (suburb) parts.unshift(suburb);

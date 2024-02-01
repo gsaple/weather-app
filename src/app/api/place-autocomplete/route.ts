@@ -7,7 +7,7 @@ interface ApiResultRelevant {
   city?: string;
   state?: string;
   country: string;
-  postcode: string;
+  postcode?: string;
   lon: number;
   lat: number;
 }
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   const input = request.nextUrl.searchParams.get("input");
   const countryCode =
     headers().get("x-vercel-ip-country")?.toLowerCase() ?? "au";
-  const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&type=postcode&format=json&limit=6&bias=countrycode:${countryCode}&apiKey=${process.env.GeoapifyApiKey}`;
+  const geoApiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&format=json&limit=6&bias=countrycode:${countryCode}&apiKey=${process.env.GeoapifyApiKey}`;
 
   try {
     const response = await fetch(geoApiUrl);
