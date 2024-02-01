@@ -8,6 +8,7 @@ export interface SuggestionItemProps {
   longitude: number;
   setGeo: (coordinates: GeoLocation) => void;
   setInput: (input: string) => void;
+  setShowCancel: (showCancel: boolean) => void;
 }
 
 const SuggestionItem: FC<SuggestionItemProps> = ({
@@ -17,6 +18,7 @@ const SuggestionItem: FC<SuggestionItemProps> = ({
   longitude,
   setGeo,
   setInput,
+  setShowCancel,
 }) => {
   const typedInputStartIndex: number = suggestion
     .toLowerCase()
@@ -33,6 +35,7 @@ const SuggestionItem: FC<SuggestionItemProps> = ({
           longitude: longitude.toString(),
         });
         setInput("");
+        setShowCancel(false);
       }}
     >
       <i className="nf nf-md-map_marker_radius mx-1 text-algae-green"></i>

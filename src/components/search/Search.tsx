@@ -9,6 +9,7 @@ interface SearchProps {
 
 const Search: FC<SearchProps> = ({ setGeo }) => {
   const [inputValue, setInputValue] = useState<string>("");
+  const [showCancel, setShowCancel] = useState<boolean>(false);
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
   const cachedSetInputValue = useCallback((inputValue: string) => {
@@ -19,10 +20,16 @@ const Search: FC<SearchProps> = ({ setGeo }) => {
     setIsSearching(isSearching);
   }, []);
 
+  const cachedSetShowCancel = useCallback((showCancel: boolean) => {
+    setShowCancel(showCancel);
+  }, []);
+
   return (
     <>
       <SearchBar
         inputValue={inputValue}
+        showCancel={showCancel}
+        setShowCancel={cachedSetShowCancel}
         setInputValue={cachedSetInputValue}
         isSearching={isSearching}
       />
@@ -31,6 +38,7 @@ const Search: FC<SearchProps> = ({ setGeo }) => {
         setIsSearching={cachedSetIsSearching}
         setGeo={setGeo}
         setInput={cachedSetInputValue}
+        setShowCancel={cachedSetShowCancel}
       />
     </>
   );

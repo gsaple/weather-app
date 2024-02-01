@@ -15,6 +15,7 @@ interface SearchResultProps {
   setIsSearching: (isSearching: boolean) => void;
   setGeo: (coordinates: GeoLocation) => void;
   setInput: (input: string) => void;
+  setShowCancel: (showCancel: boolean) => void;
 }
 
 type StatusType = "" | "error" | "empty" | "success";
@@ -27,6 +28,7 @@ const SearchResult: FC<SearchResultProps> = ({
   setIsSearching,
   setGeo,
   setInput,
+  setShowCancel,
 }) => {
   const [placeSuggestions, setPlaceSuggestions] = useState<
     SuggestedPlaceInfo[]
@@ -122,6 +124,7 @@ const SearchResult: FC<SearchResultProps> = ({
       longitude: placeSuggestion.longitude,
       setGeo: setGeo,
       setInput: setInput,
+      setShowCancel: setShowCancel,
     }));
     return <Suggestions suggestionsProps={suggestionsProps} />;
   }

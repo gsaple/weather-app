@@ -4,15 +4,18 @@ import Spinner from "../shared-ui/Spinner";
 interface SearchBarProps {
   inputValue: string;
   isSearching: boolean;
+  showCancel: boolean;
+  setShowCancel: (showCancel: boolean) => void;
   setInputValue: (inputValue: string) => void;
 }
 
 const SearchBar: FC<SearchBarProps> = ({
   inputValue,
   isSearching,
+  showCancel,
+  setShowCancel,
   setInputValue,
 }) => {
-  const [showCancel, setShowCancel] = useState<boolean>(false);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let inputText = event.currentTarget.value;
     const alphabetPattern = /^[A-Za-z\s]*$/;
