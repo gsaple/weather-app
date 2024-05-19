@@ -11,7 +11,7 @@ export function dateFormat(shiftsFromUTC: number): TimeInfo {
     localDate.getTime() + (timezoneOffset * 60 + shiftsFromUTC) * 1000;
 
   const dateFormatOfQueryPlace = new Date(utcTimeMilliseconds)
-    .toLocaleString("default", {
+    .toLocaleString("en-US", {
       day: "numeric",
       month: "long",
       weekday: "long",
